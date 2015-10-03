@@ -1,0 +1,8 @@
+---
+postgresql_admin_user: postgres
+postgresql_etc_directory: /etc/postgresql/9.3/main
+postgresql_myadmin_user: admin
+postgresql_myadmin_password: admin
+
+postgresql_sportsdb:
+  - { database: sportsdb, user: sportsdb, password: sportsdb }

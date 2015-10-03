@@ -1,0 +1,54 @@
+---
+- hosts: all
+  sudo: yes
+  vars:
+    postgresql_admin_user: postgres
+    postgresql_etc_directory: /etc/postgresql/9.3/main
+
+  tasks:
+
+  - name: Apt | Upgrade safe
+    apt: upgrade=safe
+
+  - name: Apt | Install packages
+    apt: name={{ item }} state=present
+    with_items:
+      - postgresql
+      - libpq-dev
+      - python-psycopg2
+
+  - name: Postgresql | open port for extern user
+    lineinfile: dest="{{ postgresql_etc_directory }}/postgresql.conf" regexp="^listen_addresses =" line="listen_addresses ='*'" state=present
+
+  - name: Postgresql | configure hba_conf to authorize any network client to connect to database
+    lineinfile: dest="{{ postgresql_etc_directory }}/pg_hba.conf" regexp="^host all all all md5" line="host all all all md5" state=present
+    notify:
+    - Postgresql | ensure service is reloaded
+
+  - name: Postgresql | create sportsdb
+    postgresql_db: name=sportsdb
+    sudo_user: "{{postgresql_admin_user}}"
+
+  - name: Postgresql | deploy sportsdb dump
+    copy: src={{inventory_dir}}/files/sportsdb_sample_postgresql_20080304.sql dest=/tmp/sportsdb.sql
+    notify:
+    - Postgresql | import sportsdb
+
+  - name: Postgresql | create admin user
+    postgresql_user: name=admin password=admin role_attr_flags=SUPERUSER
+    sudo_user: "{{postgresql_admin_user}}"
+
+  roles:
+
+  handlers:
+    - name: Postgresql | import sportsdb
+      shell: psql sportsdb < /tmp/sportsdb.sql
+      sudo_user: "{{postgresql_admin_user}}"
+
+    - name: Postgresql | ensure service is reloaded
+      service: name=postgresql state=reloaded
+      notify:
+      - Postgresql | ensure service is restarted
+
+    - name: Postgresql | ensure service is restarted
+      service: name=postgresql state=restarted

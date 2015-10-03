@@ -1,0 +1,3 @@
+---
+- include: tasks/postgre.yml
+- include: tasks/sportsdb.yml
