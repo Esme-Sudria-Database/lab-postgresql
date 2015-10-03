@@ -2,8 +2,6 @@
 - hosts: all
   sudo: yes
   vars:
-    postgresql_admin_user: postgres
-    postgresql_etc_directory: /etc/postgresql/9.3/main
 
   tasks:
 
@@ -25,26 +23,13 @@
     notify:
     - Postgresql | ensure service is reloaded
 
-  - name: Postgresql | create sportsdb
-    postgresql_db: name=sportsdb
-    sudo_user: "{{postgresql_admin_user}}"
-
-  - name: Postgresql | deploy sportsdb dump
-    copy: src={{inventory_dir}}/files/sportsdb_sample_postgresql_20080304.sql dest=/tmp/sportsdb.sql
-    notify:
-    - Postgresql | import sportsdb
-
   - name: Postgresql | create admin user
-    postgresql_user: name=admin password=admin role_attr_flags=SUPERUSER
+    postgresql_user: name={{ postgresql_myadmin_user }} password={{ postgresql_myadmin_password }} role_attr_flags=SUPERUSER
     sudo_user: "{{postgresql_admin_user}}"
 
   roles:
 
   handlers:
-    - name: Postgresql | import sportsdb
-      shell: psql sportsdb < /tmp/sportsdb.sql
-      sudo_user: "{{postgresql_admin_user}}"
-
     - name: Postgresql | ensure service is reloaded
       service: name=postgresql state=reloaded
       notify:
