@@ -1,2 +1,13 @@
 ---
 ansible_connection: local
+
+postgresql_myadmin_user: admin
+postgresql_myadmin_password: admin
+
+postgresql_databases:
+  - user: sportsdb
+    password: sportsdb
+    databases:
+    - name: sportsdb
+      dump_sql: "{{inventory_dir}}/files/sportsdb_sample_postgresql_20080304.sql"
+    - name: transtats

@@ -26,7 +26,7 @@ Connect on the machine as administrator
 Use external client (like pgadmin3)
 ====================================
 
-You can use pgadmin3 against this virtual machine. When you create a profile, set the host to localhost:5432 or 192.168.33.10:5432
+You can use pgadmin3 against this virtual machine. When you create a profile, set the host to 192.168.33.10:5432
 
 You can use either the account admin:admin or sportsdb:sportsdb  as login:password.
 
