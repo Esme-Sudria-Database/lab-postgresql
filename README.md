@@ -1,8 +1,41 @@
+This repository contains scripts to create a virtual machine that exposes databases we use
+during classes:
+
+* sportsdb
+* pizza_shop
+* transtats (you have to continue the installation with [Flywaydb-Transtats](https://github.com/Esme-Sudria-Database/Flywaydb-Transtats))
+
+Setup your computer
+====================
+
+You will need those softwares on your computer :
+
+* [Virtual box](https://www.virtualbox.org/)
+* [Vagrant](https://www.vagrantup.com/)
+* [Git](https://git-scm.com/)
+
+On linux
+---------
+
+    sudo apt-get install virtualbox
+    sudo apt-get install vagrant
+    sudo apt-get install git
+
+On windows
+-----------
+
+Download and install the 3 softwares above.
+
 Usage
 ======
 
+Clone this repository :
+
+    git clone https://github.com/Esme-Sudria-Database/Vagrant-Postgresql.git
+
 To create the virtual machine, use the command
 
+    cd Vagrant-Postgresql
     vagrant up
 
 This script will use image from ubuntu 14.04. Ansible will install Postgresql from apt repository and other dependencies, then it will configure it to open network access (don't do that in production).
