@@ -5,9 +5,11 @@ postgresql_myadmin_user: admin
 postgresql_myadmin_password: admin
 
 postgresql_databases:
-  - user: sportsdb
-    password: sportsdb
+  - user: user
+    password: user
     databases:
     - name: sportsdb
       dump_sql: "{{inventory_dir}}/files/sportsdb_sample_postgresql_20080304.sql"
     - name: transtats
+    - name: pizza_shop
+      dump_sql: "{{inventory_dir}}/files/pizza_shop.sql"

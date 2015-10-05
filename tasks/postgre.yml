@@ -5,10 +5,7 @@
 
   tasks:
 
-  - name: Apt | Upgrade safe
-    apt: upgrade=safe
-
-  - name: Apt | Install packages
+  - name: Apt | Install postgres packages
     apt: name={{ item }} state=present
     with_items:
       - postgresql

@@ -1,0 +1,16 @@
+---
+- hosts: all
+  sudo: yes
+  vars:
+
+  tasks:
+
+  - name: Apt | Upgrade safe
+    apt: upgrade=safe
+
+  - name: Apt | Install packages
+    apt: name={{ item }}
+    with_items:
+    - git
+    - openjdk-7-jdk
+    - maven
