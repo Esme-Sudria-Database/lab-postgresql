@@ -5,6 +5,8 @@ during classes:
 * pizza_shop
 * transtats (you have to continue the installation with [Flywaydb-Transtats](https://github.com/Esme-Sudria-Database/Flywaydb-Transtats))
 
+![pgadmin3](https://cloud.githubusercontent.com/assets/159559/10293161/9bb4f68c-6ba2-11e5-8759-8c9caa0e20d3.png)
+
 Setup your computer
 ====================
 
@@ -61,7 +63,9 @@ Use external client (like pgadmin3)
 
 You can use pgadmin3 against this virtual machine. When you create a profile, set the host to 192.168.33.10:5432
 
-You can use either the account admin:admin or sportsdb:sportsdb  as login:password.
+You can use either the account admin:admin or user:user as login:password.
+
+![server7](https://cloud.githubusercontent.com/assets/159559/10293207/d3642ec2-6ba2-11e5-8c4f-8a39e3f1c7f3.png)
 
 admin is a power user on postgresql database (never do that in production !).
 
