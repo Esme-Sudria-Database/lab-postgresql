@@ -15,6 +15,6 @@ Vagrant.configure(2) do |config|
     pip install ansible
 
     export PYTHONUNBUFFERED=1
-    ansible-playbook -i "/home/vagrant/local.ini" "/vagrant/site.yml"
+    ansible-playbook -i "/home/vagrant/vagrant/local.ini" "/vagrant/site.yml"
   SCRIPT
 end
