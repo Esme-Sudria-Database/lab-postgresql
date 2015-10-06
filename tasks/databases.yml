@@ -18,7 +18,7 @@
     with_items: postgresql_databases
 
   - name: Postgresql | create databases
-    postgresql_db: name={{ item.1.name }}
+    postgresql_db: name={{ item.1.name }} owner="{{ item.0.user }}"
     sudo_user: "{{postgresql_admin_user}}"
     with_subelements:
     - postgresql_databases
@@ -31,7 +31,7 @@
     postgresql_privs: >
       db={{ item.1.name }}
       privs=ALL
-      type=database
+      objs=ALL_IN_SCHEMA
       role={{ item.0.user }}
     sudo_user: "{{postgresql_admin_user}}"
     with_subelements:
