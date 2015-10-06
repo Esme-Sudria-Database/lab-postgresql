@@ -7,7 +7,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", inline: <<-SCRIPT
     cp -rf /vagrant /home/vagrant
-    chmod -x /home/vagrant/local.ini
+    chmod -x /home/vagrant/vagrant/local.ini
 
     apt-get update
     apt-get install -y python-pip
