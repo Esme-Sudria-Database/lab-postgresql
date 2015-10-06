@@ -47,11 +47,11 @@ Next it wil create a database, and import sportsdb sample.
 Use the postgresql database sportsdb
 ======================================
 
-    ssh sportsdb@192.168.33.10
+    ssh user@192.168.33.10
 
 You should access to the vm. Use the following command to manipulate database
 
-    psql
+    psql sportsdb
 
 Connect on the machine as administrator
 =======================================
