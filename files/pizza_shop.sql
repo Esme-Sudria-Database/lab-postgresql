@@ -50,7 +50,7 @@ create view VIEW_ORDERS as
 Select
    c.customer_id as customer_id,
    c.name as customer_name,
-   o.order_id as order_id,
+   o.order_id as order_id as order_number,
    o.order_date,
    p.name as pizza_name,
    o.quantity,

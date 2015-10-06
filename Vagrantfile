@@ -6,7 +6,7 @@ Vagrant.configure(2) do |config|
   config.vm.network "private_network", ip: "192.168.33.10"
 
   config.vm.provision "shell", inline: <<-SCRIPT
-    cp /vagrant/local.ini /home/vagrant/local.ini
+    cp -rf /vagrant /home/vagrant
     chmod -x /home/vagrant/local.ini
 
     apt-get update
