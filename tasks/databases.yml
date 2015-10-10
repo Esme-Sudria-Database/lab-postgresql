@@ -13,7 +13,7 @@
     when: item.1.dump_sql is defined
 
   - name: Postgresql | create database user
-    postgresql_user: name={{ item.user }} password={{ item.password }}
+    postgresql_user: name={{ item.user }} password={{ item.password }} role_attr_flags=CREATEDB
     sudo_user: "{{postgresql_admin_user}}"
     with_items: postgresql_databases
 
@@ -26,13 +26,12 @@
     notify:
     - Postgresql | import sql dump
 
-
-  - name: Postgresql | assign privileges to user
+  - name: Postgresql | assign database privileges to user
     postgresql_privs: >
       db={{ item.1.name }}
       privs=ALL
-      objs=ALL_IN_SCHEMA
-      role={{ item.0.user }}
+      type=database
+      roles={{ item.0.user }}
     sudo_user: "{{postgresql_admin_user}}"
     with_subelements:
     - postgresql_databases
@@ -46,7 +45,7 @@
 
   - name: Postgresql | import sql dump
     shell: psql {{ item.1.name }} < /tmp/{{ item.1.name }}.sql
-    sudo_user: "{{postgresql_admin_user}}"
+    sudo_user: "{{ item.0.user }}"
     with_subelements:
     - postgresql_databases
     - databases
