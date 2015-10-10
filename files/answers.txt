@@ -1,0 +1,5 @@
+-- Task 2 : Create database
+
+-- Task 3 : Create tables
+
+-- Task 4 : Import sql dumps using psql
