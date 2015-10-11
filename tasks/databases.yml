@@ -41,6 +41,20 @@
     user: name={{ item.user }} password="{{ item.password | password_hash('sha512') }}" shell=/bin/bash createhome=yes
     with_items: postgresql_databases
 
+  - name: Server | Configure home directory to be inaccessible other user
+    file: name="/home/{{ item.user }}" state=directory owner={{ item.user }} mode=u=rwX,g=,o= recurse=yes
+    with_items: postgresql_databases
+
+  - name: Server | Ensure snapshot directory
+    file: name="/home/{{ item.user }}/snapshots" state=directory owner={{ item.user }}
+    with_items: postgresql_databases
+
+  - name: Server | Configure snapshot scripts
+    copy: src="{{ inventory_dir }}/files/snapshots/{{ item.1 }}" dest="/home/{{ item.0.user }}/snapshots" owner={{ item.0.user }} mode=0700
+    with_nested:
+    - postgresql_databases
+    - ['snapshot.sh', 'snapshot_restore.sh']
+
   handlers:
 
   - name: Postgresql | import sql dump
