@@ -55,6 +55,12 @@
     - postgresql_databases
     - ['snapshot.sh', 'snapshot_restore.sh']
 
+  - name: Server | Copy snapshot scripts
+    copy: src="{{ item.1 }}" dest="/home/{{ item.0.user }}/snapshots" owner={{ item.0.user }} mode=0700
+    with_nested:
+    - postgresql_databases
+    - snapshots
+
   handlers:
 
   - name: Postgresql | import sql dump

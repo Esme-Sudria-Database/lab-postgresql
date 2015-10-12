@@ -1,5 +1,24 @@
 -- Task 2 : Create database
 
--- Task 3 : Create tables
+/**
+ Use this syntax to write comment or remark
+ about your work
+**/
 
--- Task 4 : Import sql dumps using psql
+-- Task 3 : Create the tables
+
+-- Task 4 : Import sql dump using psql
+
+-- Task 5 : Follow the activity by day
+
+-- Task 6 : Follow the area activity by day
+
+-- Task 7 : Create a report to help drone maintenance
+
+-- Task 8 : Soft delete for old drone
+
+-- Task 9 : Find the drone that planted the most tree
+
+-- Task 10 : Analytics
+
+-- Task 11 : Refact my database
