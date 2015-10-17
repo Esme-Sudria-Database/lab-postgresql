@@ -3,6 +3,6 @@ postgresql_admin_user: postgres
 postgresql_etc_directory: /etc/postgresql/9.3/main
 
 snapshots:
-  - "{{inventory_dir}}/files/dump/sportsdb.sql"
-  - "{{inventory_dir}}/files/dump/pizza_shop.sql"
-  - "{{inventory_dir}}/files/dump/bio_icare_drone_task3.sql"
+  - "{{inventory_dir}}/files/snapshots/sportsdb.sql"
+  - "{{inventory_dir}}/files/snapshots/pizza_shop.sql"
+  - "{{inventory_dir}}/files/snapshots/bio_icare_drone_task3.sql"

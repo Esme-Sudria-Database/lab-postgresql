@@ -1,0 +1,23 @@
+---
+- hosts: infra
+  sudo: yes
+  vars:
+
+  tasks:
+
+  - name: Apt | Ensure OS is up to date
+    apt: upgrade=safe
+
+  - name: Apt | Ensure general packages are installed
+    apt: name={{ item }} state=present
+    with_items:
+    - git
+    - openjdk-7-jdk
+    - maven
+
+  - name: Apt | Ensure postgresql is installed
+    apt: name={{ item }} state=present
+    with_items:
+    - postgresql
+    - libpq-dev
+    - python-psycopg2

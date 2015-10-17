@@ -9,7 +9,7 @@ postgresql_databases:
     password: user
     databases:
     - name: sportsdb
-      dump_sql: "{{inventory_dir}}/files/dump/sportsdb.sql"
+      dump_sql: "{{inventory_dir}}/files/snapshots/sportsdb.sql"
     - name: transtats
     - name: pizza_shop
-      dump_sql: "{{inventory_dir}}/files/dump/pizza_shop.sql"
+      dump_sql: "{{inventory_dir}}/files/snapshots/pizza_shop.sql"

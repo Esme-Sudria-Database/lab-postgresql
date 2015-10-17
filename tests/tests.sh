@@ -23,4 +23,4 @@ echo "################################"
 
 echo "### Starting tests"
 
-find ${__DIR__}/tasks -maxdepth 1 -name '*.yml'| xargs -n1  ansible-playbook --syntax-check --list-tasks -i ${__DIR__}/tests/ansible-dummy.ini
+ansible-playbook --syntax-check --list-tasks -i ${__DIR__}/tests/ansible-dummy.ini ${__DIR__}/site.yml

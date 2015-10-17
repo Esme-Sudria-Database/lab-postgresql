@@ -1,23 +1,23 @@
 ---
-- hosts: all
+- hosts: database
   sudo: yes
   vars:
 
   tasks:
 
-  - name: Postgresql | copy sql dump into the server
+  - name: Postgresql | Ensure sql dump are on the server
     copy: src={{ item.1.dump_sql }} dest=/tmp/{{ item.1.name }}.sql
     with_subelements:
     - postgresql_databases
     - databases
     when: item.1.dump_sql is defined
 
-  - name: Postgresql | create database user
+  - name: Postgresql | Ensure users exists on postgresql
     postgresql_user: name={{ item.user }} password={{ item.password }} role_attr_flags=CREATEDB
     sudo_user: "{{postgresql_admin_user}}"
     with_items: postgresql_databases
 
-  - name: Postgresql | create databases
+  - name: Postgresql | Ensure for each user, databases exists
     postgresql_db: name={{ item.1.name }} owner="{{ item.0.user }}"
     sudo_user: "{{postgresql_admin_user}}"
     with_subelements:
@@ -26,7 +26,7 @@
     notify:
     - Postgresql | import sql dump
 
-  - name: Postgresql | assign database privileges to user
+  - name: Postgresql | Ensure for each user, they have privilege to use those database
     postgresql_privs: >
       db={{ item.1.name }}
       privs=ALL
@@ -37,25 +37,25 @@
     - postgresql_databases
     - databases
 
-  - name: Server | Configure user for ssh connection
+  - name: Server | Ensure for each user, they have ssh access by password
     user: name={{ item.user }} password="{{ item.password | password_hash('sha512') }}" shell=/bin/bash createhome=yes
     with_items: postgresql_databases
 
-  - name: Server | Configure home directory to be inaccessible other user
+  - name: Server | Ensure for each user, that home directory is inaccessible for others
     file: name="/home/{{ item.user }}" state=directory owner={{ item.user }} mode=u=rwX,g=,o= recurse=yes
     with_items: postgresql_databases
 
-  - name: Server | Ensure snapshot directory
+  - name: Server | Ensure for each user, that snapshot directory exists
     file: name="/home/{{ item.user }}/snapshots" state=directory owner={{ item.user }}
     with_items: postgresql_databases
 
-  - name: Server | Configure snapshot scripts
+  - name: Server | Ensure for each user, that snapshot scripts are available
     copy: src="{{ inventory_dir }}/files/snapshots/{{ item.1 }}" dest="/home/{{ item.0.user }}/snapshots" owner={{ item.0.user }} mode=0700
     with_nested:
     - postgresql_databases
     - ['snapshot.sh', 'snapshot_restore.sh']
 
-  - name: Server | Copy snapshot scripts
+  - name: Server | Ensure for each user, the availability of existing snapshots
     copy: src="{{ item.1 }}" dest="/home/{{ item.0.user }}/snapshots" owner={{ item.0.user }} mode=0700
     with_nested:
     - postgresql_databases

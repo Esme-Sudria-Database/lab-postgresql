@@ -1,36 +1,29 @@
 ---
-- hosts: all
+- hosts: database
   sudo: yes
   vars:
 
   tasks:
 
-  - name: Apt | Install postgres packages
-    apt: name={{ item }} state=present
-    with_items:
-      - postgresql
-      - libpq-dev
-      - python-psycopg2
-
-  - name: Postgresql | open port for extern user
+  - name: Postgresql | Ensure postgresql is listening from everywhere
     lineinfile: dest="{{ postgresql_etc_directory }}/postgresql.conf" regexp="^listen_addresses =" line="listen_addresses ='*'" state=present
 
-  - name: Postgresql | configure hba_conf to authorize any network client to connect to database
+  - name: Postgresql | Ensure any postgresql user can connect using its password
     lineinfile: dest="{{ postgresql_etc_directory }}/pg_hba.conf" regexp="^host all all all md5" line="host all all all md5" state=present
     notify:
-    - Postgresql | ensure service is reloaded
+    - Postgresql | Ensure service is reloaded
 
-  - name: Postgresql | create admin user
+  - name: Postgresql | Ensure admin user exists for postgresql
     postgresql_user: name={{ postgresql_myadmin_user }} password={{ postgresql_myadmin_password }} role_attr_flags=SUPERUSER
     sudo_user: "{{postgresql_admin_user}}"
 
   roles:
 
   handlers:
-    - name: Postgresql | ensure service is reloaded
+    - name: Postgresql | Ensure service is reloaded
       service: name=postgresql state=reloaded
       notify:
-      - Postgresql | ensure service is restarted
+      - Postgresql | Ensure service is restarted
 
-    - name: Postgresql | ensure service is restarted
+    - name: Postgresql | Ensure service is restarted
       service: name=postgresql state=restarted

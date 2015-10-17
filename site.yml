@@ -1,4 +1,4 @@
 ---
-- include: tasks/common.yml
-- include: tasks/postgre.yml
+- include: tasks/infra.yml
+- include: tasks/postgres_service.yml
 - include: tasks/databases.yml
