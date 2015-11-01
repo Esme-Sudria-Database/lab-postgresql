@@ -2,3 +2,4 @@
 - include: tasks/infra.yml
 - include: tasks/postgres_service.yml
 - include: tasks/databases.yml
+- include: tasks/adminer.yml

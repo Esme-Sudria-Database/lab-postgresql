@@ -5,6 +5,9 @@
 
   tasks:
 
+  - name: Postgresql | Ensure service is started
+    service: name=postgresql state=started
+
   - name: Postgresql | Ensure sql dump are on the server
     copy: src={{ item.1.dump_sql }} dest=/tmp/{{ item.1.name }}.sql
     with_subelements:
