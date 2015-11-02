@@ -24,6 +24,15 @@
     notify:
     - Apache | Ensure service is reloaded
 
+  - name: Adminer | Ensure php values is suffisant for upload
+    ini_file: dest=/etc/php5/apache2/php.ini section=PHP option={{ item.option }} value={{ item.value }}
+    with_items:
+    - {option: upload_max_filesize, value: 20M}
+    - {option: post_max_size, value: 30M}
+    - {option: memory_limit, value: 40M}
+    notify:
+    - Apache | Ensure service is reloaded
+
   roles:
 
   handlers:
