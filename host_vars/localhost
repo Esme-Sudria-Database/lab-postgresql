@@ -13,3 +13,7 @@ postgresql_databases:
     - name: transtats
     - name: pizza_shop
       dump_sql: "{{inventory_dir}}/files/snapshots/pizza_shop.sql"
+    - name: bio_icare_drone
+      dump_sql: "{{inventory_dir}}/files/snapshots/bio_icare_drone.sql"
+    - name: bloon_project
+      dump_sql: "{{inventory_dir}}/files/snapshots/bloon_project.sql"
