@@ -26,6 +26,8 @@ during classes:</p>
 <li>sportsdb</li>
 <li>pizza_shop</li>
 <li>transtats (you have to continue the installation with <a href="https://github.com/Esme-Sudria-Database/Flywaydb-Transtats">Flywaydb-Transtats</a>)</li>
+<li>bio_icare_drone</li>
+<li>bloon_project</li>
 </ul>
 
 <p><img src="https://cloud.githubusercontent.com/assets/159559/10293161/9bb4f68c-6ba2-11e5-8759-8c9caa0e20d3.png" alt="pgadmin3"></p>
@@ -55,7 +57,7 @@ sudo apt-get install git
 <p>Download and install the 3 softwares above.</p>
 
 <h1>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+<a id="install-the-box" class="anchor" href="#install-the-box" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install the box</h1>
 
 <p>Clone this repository :</p>
 
@@ -73,7 +75,40 @@ vagrant up
 <p>Next it wil create a database, and import sportsdb sample.</p>
 
 <h1>
-<a id="use-the-postgresql-database-sportsdb" class="anchor" href="#use-the-postgresql-database-sportsdb" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use the postgresql database sportsdb</h1>
+<a id="database-usage" class="anchor" href="#database-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Database usage</h1>
+
+<h2>
+<a id="use-web-admin-adminer" class="anchor" href="#use-web-admin-adminer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use web admin adminer</h2>
+
+<p><a href="https://www.adminer.org/">Adminer</a> is a generic client for different databases written in PHP.
+You can use it from a browser :</p>
+
+<ul>
+<li><a href="http://192.168.33.10/adminer">http://192.168.33.10/adminer</a></li>
+</ul>
+
+<p>Here is the logging information to use :</p>
+
+<ul>
+<li>System : PostgreSQL</li>
+<li>Serveur : localhost</li>
+<li>Utilisateur : user</li>
+<li>Mot de passe : user</li>
+</ul>
+
+<h2>
+<a id="use-pgadmin3" class="anchor" href="#use-pgadmin3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use pgadmin3</h2>
+
+<p>You can use pgadmin3 against this virtual machine. When you create a profile, set the host to 192.168.33.10:5432</p>
+
+<p>You can use either the account admin:admin or user:user as login:password.</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/159559/10293207/d3642ec2-6ba2-11e5-8c4f-8a39e3f1c7f3.png" alt="server7"></p>
+
+<p>admin is a power user on postgresql database (never do that in production !).</p>
+
+<h2>
+<a id="use-command-line-and-psql" class="anchor" href="#use-command-line-and-psql" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use command line and psql</h2>
 
 <pre><code>ssh user@192.168.33.10
 </code></pre>
@@ -84,21 +119,10 @@ vagrant up
 </code></pre>
 
 <h1>
-<a id="connect-on-the-machine-as-administrator" class="anchor" href="#connect-on-the-machine-as-administrator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connect on the machine as administrator</h1>
+<a id="connect-to-virtualbox-as-administrator" class="anchor" href="#connect-to-virtualbox-as-administrator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connect to virtualbox as administrator</h1>
 
 <pre><code>vagrant ssh
 </code></pre>
-
-<h1>
-<a id="use-external-client-like-pgadmin3" class="anchor" href="#use-external-client-like-pgadmin3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use external client (like pgadmin3)</h1>
-
-<p>You can use pgadmin3 against this virtual machine. When you create a profile, set the host to 192.168.33.10:5432</p>
-
-<p>You can use either the account admin:admin or user:user as login:password.</p>
-
-<p><img src="https://cloud.githubusercontent.com/assets/159559/10293207/d3642ec2-6ba2-11e5-8c4f-8a39e3f1c7f3.png" alt="server7"></p>
-
-<p>admin is a power user on postgresql database (never do that in production !).</p>
 
 <h1>
 <a id="check-ansible-playbook" class="anchor" href="#check-ansible-playbook" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check ansible playbook</h1>
