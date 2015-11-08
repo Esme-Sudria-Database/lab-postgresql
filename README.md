@@ -58,6 +58,21 @@ Connect on the machine as administrator
 
     vagrant ssh
 
+Use adminer
+============
+
+[Adminer](https://www.adminer.org/) is a generic client for different databases written in PHP.
+You can use it from a browser :
+
+* http://192.168.33.10/adminer
+
+Here is the logging information to use :
+
+* System : PostgreSQL
+* Serveur : localhost
+* Utilisateur : user
+* Mot de passe : user
+
 Use external client (like pgadmin3)
 ====================================
 
