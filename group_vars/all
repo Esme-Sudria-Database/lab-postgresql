@@ -5,4 +5,5 @@ postgresql_etc_directory: /etc/postgresql/9.3/main
 snapshots:
   - "{{inventory_dir}}/files/snapshots/sportsdb.sql"
   - "{{inventory_dir}}/files/snapshots/pizza_shop.sql"
-  - "{{inventory_dir}}/files/snapshots/bio_icare_drone_task3.sql"
+  - "{{inventory_dir}}/files/snapshots/bio_icare_drone.sql"
+  - "{{inventory_dir}}/files/snapshots/bloon_project.sql"

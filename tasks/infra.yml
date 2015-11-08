@@ -18,6 +18,6 @@
   - name: Apt | Ensure postgresql is installed
     apt: name={{ item }} state=present
     with_items:
-    - postgresql
+    - postgresql-9.3
     - libpq-dev
     - python-psycopg2
