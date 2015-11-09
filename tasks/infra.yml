@@ -21,3 +21,9 @@
     - postgresql-9.3
     - libpq-dev
     - python-psycopg2
+
+  - name: Apt | Ensure postgis is installed
+    apt: name={{ item }} state=present
+    with_items:
+    - postgresql-9.3-postgis-2.1
+    - osm2pgsql
