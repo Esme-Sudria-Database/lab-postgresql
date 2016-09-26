@@ -1,7 +1,9 @@
 ---
 - hosts: database_admin
-  sudo: yes
+  become: yes
+  become_method: sudo
   vars:
+
   tasks:
 
   - name: Apache | Ensure package is installed

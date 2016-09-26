@@ -1,6 +1,7 @@
 ---
 - hosts: database
-  sudo: yes
+  become: yes
+  become_method: sudo
   vars:
 
   tasks:
@@ -15,7 +16,7 @@
 
   - name: Postgresql | Ensure admin user exists for postgresql
     postgresql_user: name={{ postgresql_myadmin_user }} password={{ postgresql_myadmin_password }} role_attr_flags=SUPERUSER
-    sudo_user: "{{postgresql_admin_user}}"
+    become_user: "{{postgresql_admin_user}}"
 
   roles:
 

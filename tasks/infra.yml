@@ -1,6 +1,7 @@
 ---
 - hosts: infra
-  sudo: yes
+  become: yes
+  become_method: sudo
   vars:
 
   tasks:
@@ -23,7 +24,7 @@
     - python-psycopg2
 
   - name: Apt | Ensure postgis is installed
-    apt: name={{ item }} state=present
+    apt: name={{ item }} state=present force=yes
     with_items:
     - postgresql-9.3-postgis-2.1
     - osm2pgsql

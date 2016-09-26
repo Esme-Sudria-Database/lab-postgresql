@@ -15,7 +15,9 @@ Vagrant.configure(2) do |config|
 
     apt-get update
     apt-get install -y python-pip
+    apt-get install -y python-dev
 
+    pip install markupsafe
     pip install ansible
 
     export PYTHONUNBUFFERED=1
