@@ -10,10 +10,15 @@ postgresql_databases:
     databases:
     - name: sportsdb
       dump_sql: "{{inventory_dir}}/files/snapshots/sportsdb.sql"
+      state: present
     - name: transtats
+      state: present
     - name: pizza_shop
       dump_sql: "{{inventory_dir}}/files/snapshots/pizza_shop.sql"
+      state: present
     - name: bio_icare_drone
       dump_sql: "{{inventory_dir}}/files/snapshots/bio_icare_drone.sql"
+      state: absent
     - name: bloon_project
       dump_sql: "{{inventory_dir}}/files/snapshots/bloon_project.sql"
+      state: absent

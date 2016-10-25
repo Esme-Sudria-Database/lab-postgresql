@@ -22,7 +22,7 @@
     with_items: "{{ postgresql_databases }}"
 
   - name: Postgresql | Ensure for each user, databases exists
-    postgresql_db: name={{ item.1.name }} owner="{{ item.0.user }}"
+    postgresql_db: name={{ item.1.name }} owner="{{ item.0.user }}" state={{item.1.state}}
     sudo_user: "{{postgresql_admin_user}}"
     with_subelements:
     - "{{ postgresql_databases }}"
@@ -40,6 +40,7 @@
     with_subelements:
     - "{{ postgresql_databases}}"
     - databases
+    when: item.1.state == "present"
 
   - name: Server | Ensure for each user, they have ssh access by password
     user: name={{ item.user }} password="{{ item.password | password_hash('sha512') }}" shell=/bin/bash createhome=yes
@@ -73,4 +74,4 @@
     with_subelements:
     - postgresql_databases
     - databases
-    when: item.1.dump_sql is defined
+    when: item.1.dump_sql is defined and item.1.state == "present"
