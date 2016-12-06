@@ -18,12 +18,12 @@
 
   - name: Postgresql | Ensure users exists on postgresql
     postgresql_user: name={{ item.user }} password={{ item.password }} role_attr_flags=CREATEDB
-    sudo_user: "{{postgresql_admin_user}}"
+    become_user: "{{postgresql_admin_user}}"
     with_items: "{{ postgresql_databases }}"
 
   - name: Postgresql | Ensure for each user, databases exists
     postgresql_db: name={{ item.1.name }} owner="{{ item.0.user }}" state={{item.1.state}}
-    sudo_user: "{{postgresql_admin_user}}"
+    become_user: "{{postgresql_admin_user}}"
     with_subelements:
     - "{{ postgresql_databases }}"
     - databases
@@ -36,7 +36,7 @@
       privs=ALL
       type=database
       roles={{ item.0.user }}
-    sudo_user: "{{postgresql_admin_user}}"
+    become_user: "{{postgresql_admin_user}}"
     with_subelements:
     - "{{ postgresql_databases}}"
     - databases
@@ -70,8 +70,8 @@
 
   - name: Postgresql | import sql dump
     shell: psql {{ item.1.name }} < /tmp/{{ item.1.name }}.sql
-    sudo_user: "{{ item.0.user }}"
+    become_user: "{{ item.0.user }}"
     with_subelements:
-    - postgresql_databases
+    - "{{ postgresql_databases }}"
     - databases
     when: item.1.dump_sql is defined and item.1.state == "present"
