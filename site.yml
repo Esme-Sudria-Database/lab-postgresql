@@ -1,5 +1,5 @@
 ---
-- include: tasks/infra.yml
-- include: tasks/postgres_service.yml
-- include: tasks/databases.yml
-- include: tasks/adminer.yml
+- import_playbook: playbooks/infra.yml
+- import_playbook: playbooks/postgres_service.yml
+- import_playbook: playbooks/databases.yml
+- import_playbook: playbooks/adminer.yml

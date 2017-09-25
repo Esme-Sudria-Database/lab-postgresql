@@ -55,25 +55,25 @@ Use web admin adminer
 [Adminer](https://www.adminer.org/) is a generic client for different databases written in PHP.
 You can use it from a browser :
 
-* http://192.168.33.10/adminer
+* http://localhost/adminer
 
 Here is the logging information to use :
 
 * System : PostgreSQL
 * Serveur : localhost
-* Utilisateur : user
-* Mot de passe : user
+* Utilisateur : postgres
+* Mot de passe : 1234
 
 Use pgadmin3
 --------------
 
 You can use pgadmin3 against this virtual machine. When you create a profile, set the host to 192.168.33.10:5432
 
-You can use either the account admin:admin or user:user as login:password.
+You can use either the account postgres:1234 or user:user as login:user.
 
 ![server7](https://cloud.githubusercontent.com/assets/159559/10293207/d3642ec2-6ba2-11e5-8c4f-8a39e3f1c7f3.png)
 
-admin is a power user on postgresql database (never do that in production !).
+postgres is the power user on postgresql database (never do that in production !).
 
 Use command line and psql
 --------------------------

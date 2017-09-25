@@ -1,6 +1,6 @@
 ---
 postgresql_admin_user: postgres
-postgresql_etc_directory: /etc/postgresql/9.3/main
+postgresql_etc_directory: /etc/postgresql/9.5/main
 
 snapshots:
   - "{{inventory_dir}}/files/snapshots/sportsdb.sql"

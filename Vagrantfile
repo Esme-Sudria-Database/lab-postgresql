@@ -2,7 +2,8 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "bento/ubuntu-16.04"
+
   config.vm.network "private_network", ip: "192.168.33.10"
 
   config.vm.provider "virtualbox" do |vb|
@@ -16,6 +17,7 @@ Vagrant.configure(2) do |config|
     apt-get update
     apt-get install -y python-pip
     apt-get install -y python-dev
+    apt-get install -y libffi-dev
 
     pip install markupsafe
     pip install ansible

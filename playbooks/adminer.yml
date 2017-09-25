@@ -1,0 +1,15 @@
+---
+- hosts: database_admin
+  become: yes
+  become_method: sudo
+  vars:
+
+  tasks:
+
+
+
+  roles:
+
+  handlers:
+  - name: Apache | Ensure service is reloaded
+    service: name=apache2 state=reloaded
