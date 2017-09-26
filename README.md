@@ -21,21 +21,40 @@ You will need those softwares on your computer :
 On linux
 ---------
 
-    sudo apt-get install virtualbox
-    sudo apt-get install vagrant
-    sudo apt-get install git
+```
+sudo apt-get install git
+```
+
+I recommand to setup the last version of vagrant and virtualbox from their website
+
+* [Vagrant](https://www.vagrantup.com/)
+* [Virtual box](https://www.virtualbox.org/)
 
 On windows
 -----------
 
 Download and install the 3 softwares above.
 
+On mac
+-------
+
+```
+brew install git
+```
+
+Install by hand :
+
+* [Vagrant](https://www.vagrantup.com/)
+* [Virtual box](https://www.virtualbox.org/)
+
 Install the box
 ================
 
 Clone this repository :
 
-    git clone https://github.com/Esme-Sudria-Database/Vagrant-Postgresql.git
+```
+git clone https://github.com/Esme-Sudria-Database/Vagrant-Postgresql.git
+```
 
 To create the virtual machine, use the command
 
@@ -67,13 +86,13 @@ Here is the logging information to use :
 Use pgadmin3
 --------------
 
-You can use pgadmin3 against this virtual machine. When you create a profile, set the host to 192.168.33.10:5432
+You can use pgadmin against this virtual machine. When you create a profile, set the host to 192.168.33.10:5432
 
 You can use either the account postgres:1234 or user:user as login:user.
 
 ![server7](https://cloud.githubusercontent.com/assets/159559/10293207/d3642ec2-6ba2-11e5-8c4f-8a39e3f1c7f3.png)
 
-postgres is the power user on postgresql database (never do that in production !).
+postgres is the power user on postgresql database. According to the principe of least privileges, I recommand not using it in production.
 
 Use command line and psql
 --------------------------
@@ -93,7 +112,3 @@ Check ansible playbook
 =======================
 
     make tests
-
-If it doesn't work due to missing ansible-galaxy roles, use :
-
-    bash scripts/bootstrap-tests.sh

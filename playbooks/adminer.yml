@@ -4,11 +4,8 @@
   become_method: sudo
   vars:
 
-  tasks:
-
-
-
   roles:
+    - esme_database.adminer
 
   handlers:
   - name: Apache | Ensure service is reloaded

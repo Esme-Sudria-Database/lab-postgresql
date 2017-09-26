@@ -1,30 +1,31 @@
 ---
 
-- name: Apache | Ensure package is installed
+- name: ensure apache package is installed
   apt: name=apache2 state=present
 
-- name: Apache | Ensure service is started
+- name: ensure apache service is started
   service: name=apache2 state=started
 
-- name: Adminer | Ensure package is installed
+- name: ensure packages required by adminer are installed
   apt: name={{ item }}
   with_items:
-  - php5
-  - php5-pgsql
+  - php7.0
+  - php7.0-pgsql
+  - libapache2-mod-php7.0
   - adminer
   notify:
-  - Apache | Ensure service is reloaded
+  - ensure apache is restarting
 
-- name: Adminer | Ensure configuration linked with apache
+- name: ensure adminer vhosts exists on apache
   file: src=/etc/adminer/apache.conf dest=/etc/apache2/sites-enabled/020-adminer.conf state=link
   notify:
-  - Apache | Ensure service is reloaded
+  - ensure apache is restarting
 
-- name: Adminer | Ensure php values is suffisant for upload
+- name: ensure php configuration are suffisant for file upload
   ini_file: dest=/etc/php5/apache2/php.ini section=PHP option={{ item.option }} value={{ item.value }}
   with_items:
   - {option: upload_max_filesize, value: 20M}
   - {option: post_max_size, value: 30M}
   - {option: memory_limit, value: 40M}
   notify:
-  - Apache | Ensure service is reloaded
+  - ensure apache is restarting
