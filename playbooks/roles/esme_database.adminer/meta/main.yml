@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  author: Fabien Arcellier
+  description: ensure adminer is available on port 8080
+
+dependencies:
+  - docker

@@ -1,5 +1,0 @@
----
-- import_playbook: playbooks/infra.yml
-- import_playbook: playbooks/postgres_service.yml
-- import_playbook: playbooks/databases.yml
-- import_playbook: playbooks/adminer.yml

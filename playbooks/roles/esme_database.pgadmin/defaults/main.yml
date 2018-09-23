@@ -1,3 +1,3 @@
 ---
 # defaults file for esme_database.adminer
-esme_database_adminer_container_name: adminer
+esme_database_pgadmin_container_name: pgadmin

@@ -1,0 +1,44 @@
+---
+# tasks file for esme_database.postgres
+
+- name: ensure supervisord is installed
+  package:
+    name: supervisor
+    state: present
+
+- name: ensure esme_postgres directory exists
+  file:
+    path: /opt/esme_postgres
+    state: directory
+
+- name: ensure esme_postgres image is present on host
+  copy:
+    src: files/esme_postgres/Dockerfile
+    dest: /opt/esme_postgres/Dockerfile
+    force: true
+
+- name: ensure esme_postgres image is build
+  docker_image:
+    path: /opt/esme_postgres
+    name: esme_postgres
+
+- name: ensure service configuration is setup
+  template:
+    src: templates/postgres.conf.j2
+    dest: "/etc/supervisor/conf.d/{{ esme_database_postgres_container_name }}.conf"
+    owner: root
+    group: root
+  register: esme_database_postgres_service_configuration
+
+- name: ensure supervisord service configuration is reloaded
+  service:
+    name: supervisor
+    state: restarted
+  when: esme_database_postgres_service_configuration.changed
+
+- name: ensure postgres service is started
+  supervisorctl:
+    name: "{{ esme_database_postgres_container_name }}"
+    state: started
+
+- import_tasks: initialize_databases.yml

@@ -1,0 +1,8 @@
+---
+galaxy_info:
+  author: your name
+  description: your description
+  company: your company (optional)
+
+dependencies:
+  - docker
