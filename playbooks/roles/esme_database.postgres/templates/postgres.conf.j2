@@ -1,6 +1,6 @@
 [program:{{ esme_database_postgres_container_name }}]
 process_name={{ esme_database_postgres_container_name }}
-command=docker run --name={{ esme_database_postgres_container_name }} --rm -e POSTGRES_PASSWORD={{ esme_database_postgres_password }} -v /dumps:/dumps --net=docker -p 5432:5432 esme_postgres
+command=docker run --name={{ esme_database_postgres_container_name }} --rm -e POSTGRES_PASSWORD={{ esme_database_postgres_password }} -v /var/lib/postgresql/data:/var/lib/postgresql/data -v /dumps:/dumps --net=docker -p 5432:5432 esme_postgres
 directory=/var/run
 user=root
 autostart=true

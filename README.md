@@ -101,20 +101,12 @@ Step 3: use the database that match our practical work
 Architecture
 ============
 
+[To complete]
+
 Troubleshooting
 ===============
 
-Use command line and psql
---------------------------
-
-```bash
-$ vagrant ssh
-```
-   
-
-You should access to the vm. Use the following command to manipulate database
-
-    psql sportsdb
+[To complete]
 
 Check ansible playbook
 =======================
