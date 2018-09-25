@@ -3,11 +3,8 @@ during classes:
 
 * sportsdb
 * pizza_shop
-* transtats (you have to continue the installation with [Flywaydb-Transtats](https://github.com/Esme-Sudria-Database/Flywaydb-Transtats))
-* bio_icare_drone
-* bloon_project
 
-![pgadmin3](https://cloud.githubusercontent.com/assets/159559/10293161/9bb4f68c-6ba2-11e5-8759-8c9caa0e20d3.png)
+![pgadmin](docs/images/pg_admin_configure_server_3.png)
 
 Requirement 1 : installation to perform on your computer
 ========================================================
