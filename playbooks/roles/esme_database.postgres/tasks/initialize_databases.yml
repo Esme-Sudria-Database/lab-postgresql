@@ -1,0 +1,68 @@
+---
+- name: ensure psycog2 package is installed (required by postgresql_* module from ansible)
+  package:
+    name: python-psycopg2
+    state: present
+
+- name: ensure /dumps directory exists
+  file:
+    path: /dumps
+    state: directory
+
+- name: ensure sql dumps are on the server
+  copy:
+    src: "{{ item.1.dump_sql }}"
+    dest: "/dumps/{{ item.1.name }}.sql"
+  with_subelements:
+    - "{{ esme_database_postgres_environments }}"
+    - databases
+  when: item.1.dump_sql is defined
+
+- name: ensure users exists on postgresql
+  postgresql_user:
+    name: "{{ item.user }}"
+    password: "{{ item.password }}"
+    role_attr_flags: CREATEDB
+    login_host: 127.0.0.1
+    login_password: "{{ esme_database_postgres_password }}"
+  with_items: "{{ esme_database_postgres_environments }}"
+
+- name: ensure for each user, databases exists
+  postgresql_db:
+    name: "{{ item.1.name }}"
+    owner: "{{ item.0.user }}"
+    state: "{{item.1.state}}"
+    login_host: 127.0.0.1
+    login_password: "{{ esme_database_postgres_password }}"
+  with_subelements:
+    - "{{ esme_database_postgres_environments }}"
+    - databases
+  notify:
+    - import sql dump
+
+- name: ensure for each user, they have privilege to use those database
+  postgresql_privs:
+    db: "{{ item.1.name }}"
+    privs: ALL
+    type: database
+    roles: "{{ item.0.user }}"
+    login_host: 127.0.0.1
+    login_password: "{{ esme_database_postgres_password }}"
+  with_subelements:
+    - "{{ esme_database_postgres_environments }}"
+    - databases
+  when: item.1.state == "present"
+
+- name: ensure for each user, they have privilege to use those table
+  postgresql_privs:
+    db: "{{ item.1.name }}"
+    privs: ALL
+    type: table
+    objs: ALL_IN_SCHEMA
+    roles: "{{ item.0.user }}"
+    login_host: 127.0.0.1
+    login_password: "{{ esme_database_postgres_password }}"
+  with_subelements:
+    - "{{ esme_database_postgres_environments }}"
+    - databases
+  when: item.1.state == "present"

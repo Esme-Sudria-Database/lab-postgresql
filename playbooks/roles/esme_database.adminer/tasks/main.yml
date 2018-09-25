@@ -1,50 +1,41 @@
 ---
 
-- name: ensure apache package is installed
-  apt: name=apache2 state=present
-
-- name: ensure apache service is started
-  service: name=apache2 state=started
-
-- name: ensure packages required by adminer are installed
-  apt: name={{ item }}
-  with_items:
-  - php7.0
-  - php7.0-pgsql
-  - libapache2-mod-php7.0
-  notify:
-  - ensure apache is restarting
-
-- name: ensure adminer package is not setup
+- name: ensure supervisord is installed
   apt:
-    name: adminer
-    state: absent
+    name: supervisor
 
-- name: ensure adminer directory exists
+- name: ensure /opt/esme_adminer directory exists
   file:
-    path: /usr/share/adminer
+    path: /opt/esme_adminer
     state: directory
 
-- name: ensure latest version of adminer has been downloaded
-  get_url:
-    url: http://www.adminer.org/latest.php
-    dest: /usr/share/adminer/adminer.php
+- name: ensure docker image definition is present on host
+  copy:
+    src: files/esme_adminer/Dockerfile
+    dest: /opt/esme_adminer/Dockerfile
+    force: true
 
-- name: ensure adminer vhosts does not exists
-  file:
-    path: /etc/apache2/sites-enabled/020-adminer.conf
-    state: absent
+- name: ensure docker image is build
+  docker_image:
+    path: /opt/esme_adminer
+    name: esme_adminer
 
-- name: ensure adminer vhosts exists on apache
-  copy: src=files/adminer.conf dest=/etc/apache2/conf-enabled/020-adminer.conf
-  notify:
-  - ensure apache is restarting
+- name: ensure service configuration is setup
+  template:
+    src: templates/adminer.conf.j2
+    dest: "/etc/supervisor/conf.d/{{ esme_database_adminer_container_name }}.conf"
+    owner: root
+    group: root
+  register: esme_database_adminer_service_configuration
 
-- name: ensure php configuration are suffisant for file upload
-  ini_file: dest=/etc/php5/apache2/php.ini section=PHP option={{ item.option }} value={{ item.value }}
-  with_items:
-  - {option: upload_max_filesize, value: 20M}
-  - {option: post_max_size, value: 30M}
-  - {option: memory_limit, value: 40M}
-  notify:
-  - ensure apache is restarting
+- name: ensure supervisord service configuration is reloaded
+  command: supervisorctl reload
+  when: esme_database_adminer_service_configuration.changed
+
+- pause:
+    seconds: 2
+
+- name: ensure adminer service is started
+  supervisorctl:
+    name: "{{ esme_database_adminer_container_name }}"
+    state: started

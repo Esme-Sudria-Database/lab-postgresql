@@ -1,0 +1,8 @@
+---
+# handlers file for esme_database.postgres
+- name: import sql dump
+  shell: docker exec -i --user {{ esme_database_postgres_admin_user }} "{{ esme_database_postgres_container_name }}" psql "{{ item.1.name }}" < /dumps/"{{ item.1.name }}".sql
+  with_subelements:
+  - "{{ esme_database_postgres_environments }}"
+  - "databases"
+  when: item.1.dump_sql is defined and item.1.state == "present"

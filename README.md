@@ -9,8 +9,8 @@ during classes:
 
 ![pgadmin3](https://cloud.githubusercontent.com/assets/159559/10293161/9bb4f68c-6ba2-11e5-8759-8c9caa0e20d3.png)
 
-Setup your computer
-====================
+Requirement 1 : installation to perform on your computer
+========================================================
 
 You will need those softwares on your computer :
 
@@ -47,66 +47,66 @@ Install by hand :
 * [Vagrant](https://www.vagrantup.com/)
 * [Virtual box](https://www.virtualbox.org/)
 
-Install the box
-================
+Step 1 : install the environment
+================================
 
-Clone this repository :
+1. clone this repository :
 
 ```
-git clone https://github.com/Esme-Sudria-Database/Vagrant-Postgresql.git
+git clone https://github.com/Esme-Sudria-Database/lab-postgresql.git
 ```
 
 To create the virtual machine, use the command
 
-    cd Vagrant-Postgresql
+    cd lab-postgresql
     vagrant up
 
-This script will use image from ubuntu 14.04. Ansible will install Postgresql from apt repository and other dependencies, then it will configure it to open network access (don't do that in production).
+This script will use image from ubuntu 18.04. Ansible will pull and run containers with postgresql and pgadmin, then load
+the sample databases.
 
-Next it wil create a database, and import sportsdb sample.
+Step 2 : configure pgadmin to use postgresql
+============================================
 
-Database usage
-================
+1. connect on http://192.168.33.10 with your browser
 
-Use web admin adminer
-------------------------
-
-[Adminer](https://www.adminer.org/) is a generic client for different databases written in PHP.
-You can use it from a browser :
-
-* http://localhost/adminer
+![pg_admin_login](docs/images/pg_admin_login.png)
 
 Here is the logging information to use :
 
-* System : PostgreSQL
-* Serveur : localhost
-* Utilisateur : postgres
-* Mot de passe : 1234
+* Utilisateur : user
+* Mot de passe : user
 
-Use pgadmin3
---------------
+[pgadmin](https://www.pgadmin.org/) is a GUI client for postgresql.
 
-You can use pgadmin against this virtual machine. When you create a profile, set the host to 192.168.33.10:5432
+2. declare your postgresql database in pgadmin
 
-You can use either the account postgres:1234 or user:user as login:user.
+![pg_admin_declare_server](docs/images/pg_admin_declare_server.png)
 
-![server7](https://cloud.githubusercontent.com/assets/159559/10293207/d3642ec2-6ba2-11e5-8c4f-8a39e3f1c7f3.png)
+2.1. write the display name in pgadmin
 
-postgres is the power user on postgresql database. According to the principe of least privileges, I recommand not using it in production.
+![pg_admin_configure_server_1](docs/images/pg_admin_configure_server_1.png)
 
-Use command line and psql
---------------------------
+2.2. configure the server connection
 
-    ssh user@192.168.33.10
+![pg_admin_configure_server_2](docs/images/pg_admin_configure_server_2.png)
 
-You should access to the vm. Use the following command to manipulate database
+Host Name : postgres
+login : user
+password: user
 
-    psql sportsdb
+the Host Name is resolved through [user-defined-network on docker](https://docs.docker.com/v17.09/engine/userguide/networking/configure-dns/).
 
-Connect to virtualbox as administrator
-=======================================
+Step 3: use the database that match our practical work
 
-    vagrant ssh
+Architecture
+============
+
+[To complete]
+
+Troubleshooting
+===============
+
+[To complete]
 
 Check ansible playbook
 =======================

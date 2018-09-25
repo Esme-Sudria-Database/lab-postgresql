@@ -1,0 +1,41 @@
+---
+
+- name: ensure supervisord is installed
+  apt:
+    name: supervisor
+
+- name: ensure /opt/esme_pgadmin directory exists
+  file:
+    path: /opt/esme_pgadmin
+    state: directory
+
+- name: ensure docker image definition is present on host
+  copy:
+    src: files/esme_pgadmin/Dockerfile
+    dest: /opt/esme_pgadmin/Dockerfile
+    force: true
+
+- name: ensure docker image is build
+  docker_image:
+    path: /opt/esme_pgadmin
+    name: esme_pgadmin
+
+- name: ensure service configuration is setup
+  template:
+    src: templates/pgadmin.conf.j2
+    dest: "/etc/supervisor/conf.d/{{ esme_database_pgadmin_container_name }}.conf"
+    owner: root
+    group: root
+  register: esme_database_pgadmin_service_configuration
+
+- name: ensure supervisord service configuration is reloaded
+  command: supervisorctl reload
+  when: esme_database_pgadmin_service_configuration.changed
+
+- pause:
+    seconds: 2
+
+- name: ensure pgadmin service is started
+  supervisorctl:
+    name: "{{ esme_database_pgadmin_container_name }}"
+    state: started
