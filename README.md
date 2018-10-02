@@ -6,6 +6,12 @@ during classes:
 
 ![pgadmin](docs/images/pg_admin_configure_server_3.png)
 
+General information
+===================
+
+* [website](esme.farcellier.com)
+* [public chat](https://gitter.im/esme-farcellier-com)
+
 Requirement 1 : installation to perform on your computer
 ========================================================
 
