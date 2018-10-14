@@ -15,7 +15,7 @@ local_esme_database_postgres_environments:
         state: present
       - name: bio_icare_drone
         dump_sql: "files/dumps/bio_icare_drone.sql"
-        state: absent
+        state: present
       - name: bloon_project
         dump_sql: "files/dumps/bloon_project.sql"
         state: absent
