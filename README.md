@@ -1,8 +1,13 @@
+[![Build Status](https://travis-ci.org/Esme-Sudria-Database/lab-postgresql.svg?branch=master)](https://travis-ci.org/Esme-Sudria-Database/lab-postgresql)
+
+
 This repository contains scripts to create a virtual machine that exposes databases we use
 during classes:
 
-* sportsdb
+* bio_icare_drone
 * pizza_shop
+* sportsdb
+* transtats
 
 ![pgadmin](docs/images/pg_admin_configure_server_3.png)
 
