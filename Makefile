@@ -9,4 +9,5 @@ ansible_documentation: ## show the task list ansible will execute
 .PHONY: tests
 tests: ## check ansible playbooks syntax
 	ansible-playbook --syntax-check -i "localhost," playbooks/lab-postgres.yml
-	ansible-lint -x ANSIBLE0016 playbooks/lab-postgres.yml
+	ansible-lint -x ANSIBLE0016,ANSIBLE0006 playbooks/lab-postgres.yml
+	cd playbooks/roles/esme_database.postgres; molecule test
