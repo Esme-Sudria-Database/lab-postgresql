@@ -32,7 +32,8 @@
   command: supervisorctl reload
   when: esme_database_pgadmin_service_configuration.changed
 
-- pause:
+- name: pause after reloading supervisorctl
+  pause:
     seconds: 2
 
 - name: ensure pgadmin service is started

@@ -15,8 +15,8 @@ Vagrant.configure(2) do |config|
     chmod -x /home/vagrant/vagrant/local.ini
 
     apt-get update
-    apt-get install -y python-pip
     apt-get install -y python-dev
+    apt-get install -y python-pip
     apt-get install -y libffi-dev
 
     pip install pyopenssl

@@ -4,14 +4,9 @@
   become_method: sudo
   vars:
 
-  tasks:
-
-    - name: Apt | Ensure general packages are installed
-      apt: name={{ item }} state=present
-      with_items:
-      - git
 
   roles:
+    - role: docker
     - role: esme_database.postgres
       esme_database_postgres_environments: "{{ local_esme_database_postgres_environments }}"
     - role: esme_database.pgadmin
