@@ -11,3 +11,4 @@
       esme_database_postgres_environments: "{{ local_esme_database_postgres_environments }}"
     - role: esme_database.pgadmin
     - role: esme_database.adminer
+    - role: esme_database.psqladmin
