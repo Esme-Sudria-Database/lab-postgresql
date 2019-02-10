@@ -39,9 +39,10 @@
   user:
     name: vagrant
     groups: docker
-    append: yes
+    append: true
 
 
 - name: Create a network
   docker_network:
     name: docker
+  when: docker_daemon_active
