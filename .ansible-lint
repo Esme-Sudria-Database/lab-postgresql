@@ -2,3 +2,9 @@ parseable: true
 quiet: true
 use_default_rules: true
 verbosity: 0
+skip_list:
+  - '305'
+  - '701'
+  - '703'
+  - 'ANSIBLE0016'
+  - 'ANSIBLE0006'

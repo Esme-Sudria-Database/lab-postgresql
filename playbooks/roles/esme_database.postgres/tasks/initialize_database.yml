@@ -1,13 +1,13 @@
 ---
 - name: import database
   debug:
-    msg: "ensure {{ db_name }} for {{ db_user}} is {{ db_state }}"
+    msg: "ensure {{ db_name }} for {{ db_user }} is {{ db_state }}"
 
 - name: ensure database exist
   postgresql_db:
     name: "{{ db_name }}"
     owner: "{{ db_user }}"
-    state: "{{ db_state}}"
+    state: "{{ db_state }}"
     login_host: 127.0.0.1
     login_password: "{{ esme_database_postgres_password }}"
   register: database_exist
@@ -21,11 +21,11 @@
 # is running directly over postgresql image.
 - name: import the sql dump in local mode
   shell: "{{ psql_restore_command }}"
-  when: esme_database_postgres_mode == "local" and db_restore == True and db_state == "present" and database_exist.changed
+  when: esme_database_postgres_mode == "local" and db_restore and db_state == "present" and database_exist.changed
 
 - name: import the sql dump in docker mode
   shell: docker exec -i --user {{ esme_database_postgres_admin_user }} "{{ esme_database_postgres_container_name }}" {{ psql_restore_command }}
-  when: esme_database_postgres_mode == "docker" and db_restore == True and db_state == "present" and database_exist.changed
+  when: esme_database_postgres_mode == "docker" and db_restore and db_state == "present" and database_exist.changed
 
 - name: ensure for each user, they have privilege to use those database
   postgresql_privs:

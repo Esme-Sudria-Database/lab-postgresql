@@ -1,7 +1,7 @@
 ---
 - name: ensure package necessary
   package:
-    name: "{{item}}"
+    name: "{{ item }}"
   with_items:
     - ca-certificates
   tags:
