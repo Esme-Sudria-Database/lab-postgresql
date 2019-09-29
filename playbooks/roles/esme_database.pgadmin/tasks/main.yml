@@ -34,7 +34,7 @@
 
 - name: pause after reloading supervisorctl
   pause:
-    seconds: 2
+    seconds: 5
 
 - name: ensure pgadmin service is started
   supervisorctl:

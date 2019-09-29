@@ -1,6 +1,6 @@
 [program:{{ esme_database_pgadmin_container_name }}]
 process_name={{ esme_database_pgadmin_container_name }}
-command=docker run --name={{ esme_database_pgadmin_container_name }} --rm -e "PGADMIN_DEFAULT_EMAIL=user" -p"80:80" -e "PGADMIN_DEFAULT_PASSWORD=user" -v /var/lib/pgadmin:/var/lib/pgadmin --net=docker esme_pgadmin
+command=docker run --name={{ esme_database_pgadmin_container_name }} --rm -e "PGADMIN_DEFAULT_EMAIL={{ esme_database_pgadmin_default_user }}" -p"80:80" -e "PGADMIN_DEFAULT_PASSWORD={{ esme_database_pgadmin_default_password }}" -v /var/lib/pgadmin:/var/lib/pgadmin --net=docker esme_pgadmin
 directory=/var/run
 user=root
 autostart=true

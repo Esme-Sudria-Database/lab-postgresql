@@ -11,6 +11,8 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision "shell", inline: <<-SCRIPT
+    export DEBIAN_FRONTEND=noninteractive
+
     cp -rf /vagrant /home/vagrant
     chmod -x /home/vagrant/vagrant/local.ini
 
