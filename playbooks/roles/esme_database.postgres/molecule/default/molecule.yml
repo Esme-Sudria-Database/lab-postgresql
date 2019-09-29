@@ -7,7 +7,7 @@ lint:
   name: yamllint
 platforms:
   - name: postgres
-    image: postgres:10.5
+    image: postgres:11.5
     port_bindings:
       - 5432: 5432
     command: postgres
