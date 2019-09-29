@@ -34,7 +34,7 @@
 
 - name: pause after reloading supervisorctl
   pause:
-    seconds: 2
+    seconds: 10
 
 - name: ensure adminer service is started
   supervisorctl:
