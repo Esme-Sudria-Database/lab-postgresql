@@ -7,9 +7,5 @@ ansible_documentation: ## show the task list ansible will execute
 	ansible-playbook --list-tasks -i "localhost," site.yml
 
 .PHONY: tests
-tests: ## check ansible playbooks syntax
-	ansible-playbook --syntax-check -i "localhost," playbooks/lab-postgres.yml
-	ansible-lint playbooks/lab-postgres.yml
-	cd playbooks/roles/docker; molecule test
-	cd playbooks/roles/esme_database.postgres/files/esme_postgres; docker build .
-	cd playbooks/roles/esme_database.postgres; molecule test
+tests: ## check docker configuration
+	docker-compose build
