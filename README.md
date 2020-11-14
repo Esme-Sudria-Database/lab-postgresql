@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Esme-Sudria-Database/lab-postgresql.svg?branch=master)](https://travis-ci.org/Esme-Sudria-Database/lab-postgresql)
+![ci](https://github.com/Esme-Sudria-Database/lab-postgresql/workflows/ci/badge.svg)
 
 
 This repository contains scripts to create a virtual machine that exposes databases we use

@@ -3,11 +3,21 @@ services:
   esme_postgresql:
     build:
       context: ./esme_postgresql
-      dockerfile: Dockerfile # optional
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=1234
     volumes:
       - /var/lib/postgresql
-      - ./dumps:/dumps
+      - /var/lib/postgresql/data
+      - ./esme_postgresql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+  esme_pgadmin:
+    build:
+      context: ./esme_pgadmin
+    ports:
+      - "8080:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.fr
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    volumes:
+    - /var/lib/pgadmin
