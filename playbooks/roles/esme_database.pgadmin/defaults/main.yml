@@ -1,5 +1,0 @@
----
-# defaults file for esme_database.adminer
-esme_database_pgadmin_container_name: pgadmin
-esme_database_pgadmin_default_user: user
-esme_database_pgadmin_default_password: user

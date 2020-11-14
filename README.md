@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Esme-Sudria-Database/lab-postgresql.svg?branch=master)](https://travis-ci.org/Esme-Sudria-Database/lab-postgresql)
+![ci](https://github.com/Esme-Sudria-Database/lab-postgresql/workflows/ci/badge.svg)
 
 
 This repository contains scripts to create a virtual machine that exposes databases we use
@@ -15,45 +15,46 @@ General information
 ===================
 
 * [website](esme.farcellier.com)
-* [public chat](https://gitter.im/esme-farcellier-com)
 
 Requirement 1 : installation to perform on your computer
 ========================================================
 
 You will need those softwares on your computer :
 
-* [Virtual box](https://www.virtualbox.org/)
-* [Vagrant](https://www.vagrantup.com/)
+* [Docker](https://www.docker.com/)
 * [Git](https://git-scm.com/)
 
 On linux
 ---------
 
+* 1. [install docker](https://docs.docker.com/engine/install/ubuntu/)
+
+* 2. install git
+
 ```
 sudo apt-get install git
 ```
 
-I recommand to setup the last version of vagrant and virtualbox from their website
-
-* [Vagrant](https://www.vagrantup.com/)
-* [Virtual box](https://www.virtualbox.org/)
+* 3. [install docker-compose](https://docs.docker.com/compose/install/#install-compose-on-linux-systems)
 
 On windows
 -----------
 
-Download and install the 3 softwares above.
+* 1. [install docker](https://docs.docker.com/docker-for-windows/install/)
+
+* 2. [install git](https://git-scm.com/download/win)
 
 On mac
 -------
+
+* 1. [install docker](https://docs.docker.com/docker-for-mac/install/)
+
+* 2. install git
 
 ```
 brew install git
 ```
 
-Install by hand :
-
-* [Vagrant](https://www.vagrantup.com/)
-* [Virtual box](https://www.virtualbox.org/)
 
 Step 1 : install the environment
 ================================
@@ -64,27 +65,29 @@ Step 1 : install the environment
 git clone https://github.com/Esme-Sudria-Database/lab-postgresql.git
 ```
 
-To create the virtual machine, use the command
+2. go on directory
 
-    cd lab-postgresql
-    vagrant up
+```bash
+cd lab-postgresql
+```
 
-This script will use image from ubuntu 18.04. Ansible will pull and run containers with postgresql and pgadmin, then load
-the sample databases.
+3. mount the lab
 
-Step 2 : configure pgadmin to use postgresql
-============================================
+```bash
+docker-compose up
+```
 
-1. connect on http://192.168.33.10 with your browser
+Step 2 : configure pgadmin to use postgresql database
+=====================================================
+
+1. connect on ``http://localhost:8080`` with your browser
 
 ![pg_admin_login](docs/images/pg_admin_login.png)
 
 Here is the logging information to use :
 
-* Utilisateur : user
-* Mot de passe : user
-
-[pgadmin](https://www.pgadmin.org/) is a GUI client for postgresql.
+* Utilisateur : admin@admin.fr
+* Password : admin
 
 2. declare your postgresql database in pgadmin
 
@@ -98,13 +101,14 @@ Here is the logging information to use :
 
 ![pg_admin_configure_server_2](docs/images/pg_admin_configure_server_2.png)
 
-Host Name : postgres
-login : user
-password: user
+* Host Name : esme_postgresql
+* login : postgres
+* password: 1234
 
-the Host Name is resolved through [user-defined-network on docker](https://docs.docker.com/v17.09/engine/userguide/networking/configure-dns/).
+Magic behind the hostname : the Host Name is resolved through [user-defined-network on docker](https://docs.docker.com/v17.09/engine/userguide/networking/configure-dns/).
 
 Step 3: use the database that match our practical work
+======================================================
 
 Architecture
 ============
@@ -116,7 +120,7 @@ Troubleshooting
 
 [To complete]
 
-Check ansible playbook
-=======================
+Run continuous integration process
+==================================
 
     make tests

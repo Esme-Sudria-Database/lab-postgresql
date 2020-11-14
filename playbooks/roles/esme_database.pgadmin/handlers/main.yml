@@ -1,4 +1,0 @@
----
-# handlers file for esme_database.adminer
-- name: ensure apache is restarting
-  service: name=apache2 state=restarted
