@@ -21,3 +21,11 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=admin
     volumes:
     - /var/lib/pgadmin
+
+  esme_console:
+    build:
+      context: ./esme_console
+    ports:
+      - "7681:7681"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
