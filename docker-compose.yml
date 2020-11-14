@@ -1,0 +1,13 @@
+version: '3'
+services:
+  esme_postgresql:
+    build:
+      context: ./esme_postgresql
+      dockerfile: Dockerfile # optional
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=1234
+    volumes:
+      - /var/lib/postgresql
+      - ./dumps:/dumps
