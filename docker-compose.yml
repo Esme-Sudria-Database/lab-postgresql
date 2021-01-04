@@ -29,3 +29,11 @@ services:
       - "7681:7681"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
+  esme_bi_platform:
+    build:
+      context: ./esme_bi_platform
+    volumes:
+      - /metabase-data
+    ports:
+      - "3000:3000"
