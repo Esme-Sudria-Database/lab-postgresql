@@ -14,7 +14,7 @@ during classes:
 General information
 ===================
 
-* [website](esme.farcellier.com)
+* [website](http://databases.esme.s3-website.eu-west-3.amazonaws.com/)
 
 Requirement 1 : installation to perform on your computer
 ========================================================
