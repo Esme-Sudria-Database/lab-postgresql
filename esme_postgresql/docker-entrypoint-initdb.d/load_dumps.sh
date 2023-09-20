@@ -1,5 +1,6 @@
-#!/bin/bash -x
-set -e
+#!/bin/bash
+
+set -e -x
 
 databases=("bio_icare_drone" "bloon_project" "pizza_shop" "sportsdb" "transtats")
 
